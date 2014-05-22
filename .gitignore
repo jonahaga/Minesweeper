@@ -1,2 +1,3 @@
 *.esproj
-img/src
+img/src/*
+.DS_Store
