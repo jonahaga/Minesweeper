@@ -1,0 +1,143 @@
+/* @group RESET */
+
+html, body, div {
+    border: 0;
+    font: inherit;
+    font-size: 100%;
+    margin: 0;
+    padding: 0; }
+
+/* HTML5 display-role reset for older browsers */
+
+body { 
+    background: #aaa;
+    font-family: 'Verdana', sans-serif;
+	line-height: 1 }
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0; }
+
+/* @end */
+
+/* @group GRID LAYOUT */
+
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table; }
+
+.clearfix:after { clear: both }
+
+.size1of5 {
+    float: left;
+    width: 20%; }
+
+.size2of5 {
+    float: left;
+    width: 40%; }
+
+.margin { margin: 0 20px }
+
+/* @end */
+
+/* @group BOARD */
+
+#board-wrapper {
+    background: #bdbdbd;
+    border: 5px outset #d5d5d5;
+    margin: 40px auto;
+    padding: 10px;
+    width: 243px; }
+
+#controls {
+    margin-left: -20px;
+    padding: 5px 0 15px;
+    width: 284px; }
+
+    #controls div > div > div { text-align: center }
+
+.smiley {
+    background: url(../img/smiley.png) no-repeat;
+    border: 3px outset !important;
+    height: 35px !important;
+    margin: 0 auto;
+    width: 35px; }
+
+.smiley:active {
+    background-color: #aaa;
+    border: 3px inset !important; }
+
+.reset button {
+    background-color: #bcbcbc;
+    border: 3px outset;
+    color: #444;
+    font: normal 14px/1 "Verdana", sans-serif;
+    height: 41px;
+    width: 73px; }
+
+.reset button:active {
+    background-color: #aaa;
+    border: 3px inset; }
+
+.timer {
+    background-color: #aaa;
+    border: 3px inset;
+    height: 36px; }
+
+    .timer p {
+        color: #555;
+        font-weight: bold;
+        margin-top: 8px; }
+
+/* @end */
+
+/* @group FIELD */
+
+table { border: 3px solid #888 }
+
+td.covered,
+td.uncovered {
+    font-weight: bold;
+    height: 30px;
+    text-align: center;
+    white-space: nowrap;
+    width: 30px; }
+
+    td.uncovered .mine {
+        background: url(../img/mine.png) 5px no-repeat;
+        height: 100%; }
+
+    td.uncovered span { display: block }
+
+    td.covered .blue,
+    td.covered .red,
+    td.covered .green,
+    td.covered .purple { color: grey }
+
+    td.covered .mine {
+        background: url(../img/mine-hint.png) 5px no-repeat;
+        display: block;
+        height: 100%; }
+
+td.covered {
+    -moz-box-shadow: inset 3px 3px #dbdbdb;
+    -webkit-box-shadow: inset 3px 3px #dbdbdb;
+    box-shadow: inset 3px 3px #dbdbdb;
+    outline: 1px solid #888; }
+
+td.uncovered {
+    background-color: #aaa;
+    outline: 1px solid #888; }
+
+td.mine-end { background-color: #c70606 }
+
+.blue { color: blue }
+
+.red { color: red }
+
+.green { color: green }
+
+.purple { color: purple }
+
+/* @end */
