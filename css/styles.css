@@ -29,14 +29,9 @@ table {
 
 .clearfix:after { clear: both }
 
-.size1of5 {
-    float: left;
-    width: 20%; }
-
-.size2of5 {
-    float: left;
-    width: 40%; }
-
+.size1of5 { float: left; width: 20%; }
+.size2of5 { float: left; width: 40%; }
+.size1of8 { float: left; width: 30px; }
 .margin { margin: 0 20px }
 
 /* @end */
@@ -48,12 +43,12 @@ table {
     border: 5px outset #d5d5d5;
     margin: 40px auto;
     padding: 10px;
-    width: 243px; }
+    width: 246px; }
 
 #controls {
     margin-left: -20px;
     padding: 5px 0 15px;
-    width: 284px; }
+    width: 286px; }
 
     #controls div > div > div { text-align: center }
 
@@ -72,13 +67,14 @@ table {
     background-color: #bcbcbc;
     border: 3px outset;
     color: #444;
-    font: normal 14px/1 "Verdana", sans-serif;
+    font: bold 14px/1 "Verdana", sans-serif;
     height: 41px;
     width: 73px; }
 
 .reset button:active {
     background-color: #aaa;
-    border: 3px inset; }
+    border: 3px inset;
+    outline: none; }
 
 .timer {
     background-color: #aaa;
@@ -88,56 +84,57 @@ table {
     .timer p {
         color: #555;
         font-weight: bold;
-        margin-top: 8px; }
+        margin: 9px; }
 
 /* @end */
 
 /* @group FIELD */
 
-table { border: 3px solid #888 }
+#field { border: 3px solid #888 }
 
-td.covered,
-td.uncovered {
-    font-weight: bold;
-    height: 30px;
-    text-align: center;
-    white-space: nowrap;
-    width: 30px; }
-
-    td.uncovered .mine {
-        background: url(../img/mine.png) 5px no-repeat;
-        height: 100%; }
-
-    td.uncovered span { display: block }
-
-    td.covered .blue,
-    td.covered .red,
-    td.covered .green,
-    td.covered .purple { color: grey }
-
-    td.covered .mine {
-        background: url(../img/mine-hint.png) 5px no-repeat;
-        display: block;
-        height: 100%; }
-
-td.covered {
+.covered {
     -moz-box-shadow: inset 3px 3px #dbdbdb;
     -webkit-box-shadow: inset 3px 3px #dbdbdb;
     box-shadow: inset 3px 3px #dbdbdb;
     outline: 1px solid #888; }
 
-td.uncovered {
+.uncovered {
     background-color: #aaa;
     outline: 1px solid #888; }
 
-td.mine-end { background-color: #c70606 }
+.covered,
+.uncovered {
+    font-weight: bold;
+    height: 30px;
+    text-align: center;
+    white-space: nowrap;}
+
+	.uncovered .mine {
+        background: url(../img/mine.png) 5px no-repeat;
+        height: 100%; 
+        padding: 0; }
+
+    .covered span,
+    .uncovered span { 
+    	display: block;
+    	padding: 5px; }
+
+    .covered .blue,
+    .covered .red,
+    .covered .green,
+    .covered .purple { color: grey }
+
+    .covered .mine {
+        background: url(../img/mine-hint.png) 5px no-repeat;
+        display: block;
+        height: 100%;
+        padding: 0; }
+        
+.mine-end { background-color: #c70606 }
 
 .blue { color: blue }
-
-.red { color: red }
-
+.red { color: #c70606 }
 .green { color: green }
-
 .purple { color: purple }
 
 /* @end */
