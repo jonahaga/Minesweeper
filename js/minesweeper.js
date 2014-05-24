@@ -4,8 +4,8 @@ $(document).ready(function() {
 		el: $('#field'),
 		matrix: [[]],
 		reset: function() {
-			this.el.find('td').removeClass('uncovered').addClass('covered');
-			this.el.find('td').empty();
+			this.el.find('.uncovered').removeClass('uncovered').addClass('covered');
+			this.el.find('.size1of8 div').empty();
 			this.layMines();
 			Controls.resetTimer();
 		},
@@ -13,11 +13,8 @@ $(document).ready(function() {
 			var x = 0;
 			var y = 0;
 			var matrix = this.matrix;
-			$('.covered').click(function() {
-				$(this).removeClass().addClass('uncovered');
-			});
-
-			this.el.find('td').each(function(index, cell) {
+			
+			this.el.find('.covered').each(function(index, cell) {
 				x = index % 8;
 				y = Math.floor(index / 8);
 				
@@ -33,15 +30,15 @@ $(document).ready(function() {
 				$(cell).data(cellData);
 			});
 
-			this.el.find('td').click(this.clickedCell);
+			this.el.find('.covered').click(this.clickedCell);
 
 			this.layMines();
 
-			this.el.find('td').mouseenter(function() {
+			this.el.find('.covered').mouseenter(function() {
 				$('.hover').removeClass('hover');
 				$(this).addClass('hover');
 			});
-			this.el.find('td').mouseout(function() {
+			this.el.find('.covered').mouseout(function() {
 				$(this).removeClass('hover');
 			});
 			$('body').keypress(function(event) {
@@ -59,17 +56,20 @@ $(document).ready(function() {
 			if (data.hasMine) {
 				Controls.stopTimer();
 				$(this).addClass('mine');
-				$(this).addClass('mine-end');
-				Field.el.find('td').each(function(index, cell) {
+				if(!Field.isGameOver()){
+					$(this).addClass('mine-end');
+				}
+				Field.el.find('.size1of8 div').each(function(index, cell) {
 					Field.setCellNumber(cell, true);
 					$('.smiley').css('background-image', 'url(img/smiley_dead.png)');
 					$('.smiley').css('background-repeat', 'no-repeat');
 				});
 				return;
 			}
+			
 			Field.setCellNumber(this, true);
 			Field.revealEmpty(data.x, data.y);
-			Field.el.find('td').each(function(index, cell) {
+			Field.el.find('.covered').each(function(index, cell) {
 				$(cell).data('visited', false);
 			});
 		},
@@ -97,7 +97,7 @@ $(document).ready(function() {
 			else {
 				$cell.html('<span>' + $cell.data('mineCount') + '</span>');
 			}
-			if (doUncover) {
+			if (doUncover && !Field.isGameOver()) {
 				$cell.removeClass('covered').addClass('uncovered');
 			}
 		},
@@ -164,7 +164,7 @@ $(document).ready(function() {
 			$(matrix[x][y]).data('mineCount', mineCount);
 		},
 		layMines: function() {
-			this.el.find('td').each(function(index, cell) {
+			this.el.find('.covered').each(function(index, cell) {
 				$(cell).data('hasMine', false);
 			});
 
@@ -181,7 +181,7 @@ $(document).ready(function() {
 				}
 			}
 
-			this.el.find('td').each(function(index, cell) {
+			this.el.find('.covered').each(function(index, cell) {
 				var x = index % 8;
 				var y = Math.floor(index / 8);
 				Field.setMineCount(x, y);
@@ -189,7 +189,7 @@ $(document).ready(function() {
 		},
 		isGameOver: function() {
 			var gameOver = true;
-			this.el.find('td').each(function(index, cell) {
+			this.el.find('.size1of8 div').each(function(index, cell) {
 				if($(cell).hasClass('covered') && !$(cell).data('hasMine')) {
 					gameOver = false;
 				}
@@ -197,7 +197,7 @@ $(document).ready(function() {
 			return gameOver;
 		},
 		cheat: function() {
-			Field.setCellNumber($('td.hover'), false);
+			Field.setCellNumber($('.hover'), false);
 		}
 	};
 
@@ -206,14 +206,16 @@ $(document).ready(function() {
 		init: function(){
 			$('.reset').click(function() {
 				$('.smiley').css('background', 'url(img/smiley.png) no-repeat');
-				$('.mine').removeClass();
-				$('.hover').removeClass();
+				$('.mine').removeClass('.mine');
+				$('.hover').removeClass('.hover');
+				$('.mine-end').removeClass('mine-end');
+
 				Field.reset();
 			});
 			$('.smiley').click(function() {
 				if(Field.isGameOver()) {
 					var counter = 0;
-					Field.el.find('td').each(function(index, cell) {
+					Field.el.find('.size1of8 div').each(function(index, cell) {
 						if ($(cell).hasClass('uncovered')) {
 							counter += 1;
 						}
