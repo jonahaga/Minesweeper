@@ -14,6 +14,9 @@ $(document).ready(function() {
 			var y = 0;
 			var matrix = this.matrix;
 			
+			$('.covered').click(function() {
+				$(this).removeClass().addClass('uncovered');
+			});
 			this.el.find('.covered').each(function(index, cell) {
 				x = index % 8;
 				y = Math.floor(index / 8);
@@ -53,12 +56,10 @@ $(document).ready(function() {
 			var matrix = Field.matrix;
 			Controls.startTimer();
 			
-			if (data.hasMine) {
+			if (data.hasMine && !Field.isGameOver()) {
 				Controls.stopTimer();
 				$(this).addClass('mine');
-				if(!Field.isGameOver()){
-					$(this).addClass('mine-end');
-				}
+				$(this).addClass('mine-end');
 				Field.el.find('.size1of8 div').each(function(index, cell) {
 					Field.setCellNumber(cell, true);
 					$('.smiley').css('background-image', 'url(img/smiley_dead.png)');
@@ -117,12 +118,12 @@ $(document).ready(function() {
 			if (cell.data('mineCount') === 0) {
 				Field.revealEmpty(x-1, y-1);
 				Field.revealEmpty(x-1, y);
-				Field.revealEmpty(x-1,y+1);
-				Field.revealEmpty(x,y-1);
-				Field.revealEmpty(x,y+1);
-				Field.revealEmpty(x+1,y-1);
-				Field.revealEmpty(x+1,y);
-				Field.revealEmpty(x+1,y+1);
+				Field.revealEmpty(x-1, y+1);
+				Field.revealEmpty(x, y-1);
+				Field.revealEmpty(x, y+1);
+				Field.revealEmpty(x+1, y-1);
+				Field.revealEmpty(x+1, y);
+				Field.revealEmpty(x+1, y+1);
 			}
 		},
 		setMineCount: function(x, y) {
@@ -136,30 +137,14 @@ $(document).ready(function() {
 			}
 			
 			// count the surrrounding mines
-			if (cellHasMine(x-1,y-1)) {
-				mineCount += 1;
-			}
-			if (cellHasMine(x-1,y)) {
-				mineCount += 1;
-			}
-			if (cellHasMine(x-1,y+1)) {
-				mineCount += 1;
-			}
-			if (cellHasMine(x,y-1)) {
-				mineCount += 1;
-			}
-			if (cellHasMine(x,y+1)) {
-				mineCount += 1;
-			}
-			if (cellHasMine(x+1,y-1)) {
-				mineCount += 1;
-			}
-			if (cellHasMine(x+1,y)) {
-				mineCount += 1;
-			}
-			if (cellHasMine(x+1,y+1)) {
-				mineCount += 1;
-			}
+			if (cellHasMine(x-1, y-1)) { mineCount += 1; }
+			if (cellHasMine(x-1, y))   { mineCount += 1; }
+			if (cellHasMine(x-1, y+1)) { mineCount += 1; }
+			if (cellHasMine(x,   y-1)) { mineCount += 1; }
+			if (cellHasMine(x,   y+1)) { mineCount += 1; }
+			if (cellHasMine(x+1, y-1)) { mineCount += 1; }
+			if (cellHasMine(x+1, y))   { mineCount += 1; }
+			if (cellHasMine(x+1, y+1)) { mineCount += 1; }
 
 			$(matrix[x][y]).data('mineCount', mineCount);
 		},
